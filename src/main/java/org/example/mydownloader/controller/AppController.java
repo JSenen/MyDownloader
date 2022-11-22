@@ -45,6 +45,11 @@ public class AppController {
         }
 
     }
+    @FXML
+    public void stopAllDownloads() {
+        for (DownloadController downloadController : allDownloads.values())
+            downloadController.stop();
+    }
 
 
 }
