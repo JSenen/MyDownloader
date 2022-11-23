@@ -38,7 +38,7 @@ Requisitos (1 pto cada uno, obligatorios)
             downloadTask.cancel();
     }`
 ●	La ruta donde se descargan los ficheros, que será fija, se podrá configurar desde la aplicación -[ ] Pendiente ❌
-●	Se mantendrá un historial de todos los ficheros descargados por la aplicación y todas las descargas fallidas/canceladas. Este fichero se almacenará como fichero de registro y podrá consultarse desde el interfaz de usuario
+●	Se mantendrá un historial de todos los ficheros descargados por la aplicación y todas las descargas fallidas/canceladas. Este fichero se almacenará             como fichero de registro y podrá consultarse desde el interfaz de usuario ✅
     
     Se crea una dependencia en el pom
     `<dependency>
