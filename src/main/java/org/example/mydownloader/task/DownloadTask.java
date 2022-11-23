@@ -56,7 +56,8 @@ public class DownloadTask extends Task<Integer> {
             elapsedTime = Duration.between(start, current).toSeconds();
 
             updateProgress(downloadProgress, 1);
-            updateMessage(Math.round(downloadProgress * 100) + " %\t\t"+Math.round(elapsedTime)+"seg\t\t"+totalRead/1048576+"Mb");
+            updateMessage(Math.round(downloadProgress * 100) + " %\t\t"+Math.round(elapsedTime)+"seg\t\t"+totalRead/1048576+"Mb de "+fileSize/1000/1048576);
+            //TODO Arreglar visionado Mb totales
 
             //Realiza descarga mas lenta
             Thread.sleep(1);
