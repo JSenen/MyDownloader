@@ -75,12 +75,9 @@ public class AppController {
     public void readDLC() {
         //Descarga desde fichero
          try {
-            // Descarga desde fichero "dlc.txt".
-            File dlcFile = new File("dlc.txt");
-
-            // Quitar comentario para descarga desde el fichero que el usuario seleccione.
-            /*FileChooser fileChooser = new FileChooser();
-            File dlcFile = fileChooser.showOpenDialog(tfUrl.getScene().getWindow());*/
+            // Usuario selecciona fichero
+            FileChooser fileChooser = new FileChooser();
+            File dlcFile = fileChooser.showOpenDialog(tfUrl.getScene().getWindow());
             if (dlcFile == null)
                 return;
 
