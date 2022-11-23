@@ -11,6 +11,8 @@ import java.io.FileOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.Duration;
+import java.time.Instant;
 
 public class DownloadTask extends Task<Integer> {
 
@@ -42,11 +44,20 @@ public class DownloadTask extends Task<Integer> {
         int totalRead = 0;
         double downloadProgress = 0;
 
+        //Calculo tiempo de la descarga
+        Instant start = Instant.now();
+        Instant current;
+        float elapsedTime;
+
         while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
             downloadProgress = ((double) totalRead / fileSize);
+            //Calculo por cada interacción
+            current = Instant.now();
+            elapsedTime = Duration.between(start, current).toSeconds();
 
             updateProgress(downloadProgress, 1);
-            updateMessage(downloadProgress * 100 + " %");
+            updateMessage(Math.round(downloadProgress * 100) + " %\t\t"+Math.round(elapsedTime)+"seg\t\t"+totalRead/1048576+"Mb de "+fileSize/1000/1048576);
+            //TODO Arreglar visionado Mb totales
 
             //Realiza descarga mas lenta
             Thread.sleep(1);
