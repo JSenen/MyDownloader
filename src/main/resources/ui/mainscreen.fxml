@@ -7,13 +7,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <VBox fx:id="panel" prefHeight="488.0" prefWidth="598.0">
          <children>
             <TextField fx:id="tfUrl" />
             <Button fx:id="btDownload" mnemonicParsing="false" onAction="#launchDownload" text="Descargar" />
-            <Button fx:id="btFileDownload" mnemonicParsing="false"  text="Descargar de fichero DLC" textFill="#0bd035" />
+            <Button fx:id="btFileDownload" mnemonicParsing="false" onAction="#launchFileDownload" text="Descargar de fichero DLC" textFill="#cf2a0c" />
             <Button fx:id="btStopAllDownloads" mnemonicParsing="false" onAction="#stopAllDownloads" prefHeight="24.0" prefWidth="238.0" text="Cancelar todas las descargas" />
             <TabPane fx:id="tpDownloads" prefHeight="313.0" prefWidth="578.0" tabClosingPolicy="UNAVAILABLE" />
          </children>
