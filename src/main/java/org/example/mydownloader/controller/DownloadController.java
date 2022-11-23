@@ -72,45 +72,6 @@ public class DownloadController implements Initializable {
         this.urlText = urlText;
     }
 
-    public void start(ActionEvent actionEvent) {
-        try{
-            FileChooser fileChooser = new FileChooser();
-            File file = fileChooser.showSaveDialog(tfUrl.getScene().getWindow());
-            if (file == null)
-                return;
-
-            downloadTask = new DownloadTask(urlText, file);
-
-            pbProgress.progressProperty().unbind();
-            pbProgress.progressProperty().bind(downloadTask.progressProperty());
-
-            downloadTask.stateProperty().addListener((observableValue, oldState, newState) -> {
-                System.out.println(observableValue.toString());
-                //Ventana emergente aviso descarga terminada o fallida
-                if (newState == Worker.State.SUCCEEDED) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setContentText("La descarga ha terminado");
-                    alert.show();
-                } else if (newState == Worker.State.FAILED) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setContentText("Error en la descarga");
-                    alert.show();
-                }
-            });
-
-            downloadTask.messageProperty()
-                    .addListener((observableValue, oldValue, newValue) -> lbStatus.setText(newValue));
-
-            new Thread(downloadTask).start(); //Nuevo hilo de descarga
-        } catch (MalformedURLException murle) {
-            murle.printStackTrace();
-            logger.error("URL mal formada", murle.fillInStackTrace());
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-
-    }
 
     @FXML
     public void stop(ActionEvent event) {
