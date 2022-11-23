@@ -38,7 +38,8 @@ Requisitos (1 pto cada uno, obligatorios)
             downloadTask.cancel();
     }`
 ●	La ruta donde se descargan los ficheros, que será fija, se podrá configurar desde la aplicación -[ ] Pendiente ❌
-●	Se mantendrá un historial de todos los ficheros descargados por la aplicación y todas las descargas fallidas/canceladas. Este fichero se almacenará             como fichero de registro y podrá consultarse desde el interfaz de usuario ✅
+●	Se mantendrá un historial de todos los ficheros descargados por la aplicación y todas las descargas fallidas/canceladas. Este fichero se almacenará 
+    como fichero de registro y podrá consultarse desde el interfaz de usuario ✅
     
     Se crea una dependencia en el pom
     `<dependency>
@@ -47,9 +48,9 @@ Requisitos (1 pto cada uno, obligatorios)
             <version>2.19.0</version>
         </dependency>`
     La cual nos permite utilizar la librería log4j para ir guardando un registro de cada descarga
-    Creamos un atributo en el DownloadController para su gestión:
+    Le indicamos la clase DonwloaderController como la que supervisionamos
     `private static final Logger logger = LogManager.getLogger(DownloadController.class);`
-    Y en el constructor de la clase vamos guardando los registros
+    Y en el constructor de la clase vamos guardando los registros de modo "info".
     ` public DownloadController(String urlText) {
         logger.info("Descarga dirección " + urlText + " creada");
         this.urlText = urlText;
