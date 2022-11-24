@@ -37,7 +37,24 @@ Requisitos (1 pto cada uno, obligatorios)
         if (downloadTask != null)
             downloadTask.cancel();
     }`
-●	La ruta donde se descargan los ficheros, que será fija, se podrá configurar desde la aplicación -[ ] Pendiente ❌
+●	La ruta donde se descargan los ficheros, que será fija, se podrá configurar desde la aplicación ✅
+
+    Se ha creado un nuevo camp de texto, asoaciado a una variable "path", en la que figura la ruta donde sse guardará por defecto.
+    También se ha añadido un nuevo boton, para que el usuario pueda seleccionar la ruta de destino si así lo desea.
+
+    En la clase DownloadTask se ha pasado un nuevo dato, path, con la ruta. Y entre ese dato y el fichero se le pasa al FileOutputStream 
+    para que lo guarde en la ruta seleccionada.
+
+    ` public DownloadTask(String urlText, File file, String path) throws MalformedURLException {
+        this.url = new URL(urlText);
+        this.file = file;
+        this.path = path;
+        //Creamos una cadena con la ruta donde se grabara y el fichero
+        filepath = path+"/"+file.toString();
+
+    } `
+
+    ` FileOutputStream fileOutputStream = new FileOutputStream(filepath); `
 ●	Se mantendrá un historial de todos los ficheros descargados por la aplicación y todas las descargas fallidas/canceladas. Este fichero se almacenará 
     como fichero de registro y podrá consultarse desde el interfaz de usuario ✅
     
