@@ -7,20 +7,36 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <VBox fx:id="panel" prefHeight="488.0" prefWidth="757.0">
          <children>
-            <HBox prefHeight="37.0" prefWidth="578.0">
+            <HBox alignment="CENTER" prefHeight="84.0" prefWidth="737.0">
                <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="URL: " textAlignment="CENTER" wrappingWidth="55.11669921875" />
                   <TextField fx:id="tfUrl" prefHeight="26.0" prefWidth="420.0" />
-                  <Button fx:id="btDownload" mnemonicParsing="false" onAction="#launchDownload" prefHeight="26.0" prefWidth="156.0" text="Descargar" />
-                  <Button fx:id="btFileDownload" mnemonicParsing="false" onAction="#launchFileDownload" text="Descargar de fichero DLC" textFill="#cf2a0c" />
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="208.0">
+                     <children>
+                        <Button fx:id="btDownload" mnemonicParsing="false" onAction="#launchDownload" prefHeight="26.0" prefWidth="156.0" text="Descargar" />
+                        <Button fx:id="btFileDownload" mnemonicParsing="false" onAction="#launchFileDownload" text="Descargar de fichero DLC" textFill="#cf2a0c" />
+                        <Button fx:id="btStopAllDownloads" mnemonicParsing="false" onAction="#stopAllDownloads" prefHeight="26.0" prefWidth="158.0" text="Cancelar Descargas" />
+                     </children>
+                  </VBox>
                </children>
             </HBox>
-            <Button fx:id="btSlelectPath" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="Seleccionar Destino" />
-            <Button fx:id="btStopAllDownloads" mnemonicParsing="false" onAction="#stopAllDownloads" prefHeight="26.0" prefWidth="158.0" text="Cancelar Descargas" />
+            <HBox alignment="CENTER" prefHeight="63.0" prefWidth="737.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Path" textAlignment="CENTER" wrappingWidth="53.958984375" />
+                  <TextField fx:id="tFDirectory" prefHeight="26.0" prefWidth="418.0" promptText="/Users/JSenen/Downloads" />
+                  <VBox alignment="CENTER" prefHeight="64.0" prefWidth="217.0">
+                     <children>
+                        <Button fx:id="btDirectory" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#selectDirectory" prefHeight="26.0" prefWidth="155.0" text="Seleccionar Destino" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
             <TabPane fx:id="tpDownloads" prefHeight="313.0" prefWidth="578.0" tabClosingPolicy="UNAVAILABLE" />
          </children>
          <padding>

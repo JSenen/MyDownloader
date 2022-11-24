@@ -7,10 +7,12 @@ import org.example.mydownloader.controller.DownloadController;
 
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -18,16 +20,22 @@ public class DownloadTask extends Task<Integer> {
 
     private URL url;
     private File file;
+    private String path;
+    private String filepath;
     private static final Logger logger = LogManager.getLogger(DownloadController.class);
 
-    public DownloadTask(String urlText, File file) throws MalformedURLException {
+    public DownloadTask(String urlText, File file, String path) throws MalformedURLException {
         this.url = new URL(urlText);
         this.file = file;
+        this.path = path;
+        //Creamos una cadena con la ruta donde se grabara y el fichero
+        filepath = path+"/"+file.toString();
+
     }
 
     @Override
     protected Integer call() throws Exception {
-        logger.trace("Descarga " + url.toString() + " iniciada");
+        logger.trace("Descarga " + url.toString() + " iniciada "+" en directorio "+path);
         updateMessage("Conectando con el servidor . . .");
 
         //Acceso al fichero URL
@@ -38,7 +46,8 @@ public class DownloadTask extends Task<Integer> {
         double megaSize = fileSize / 1048576;
 
         BufferedInputStream in = new BufferedInputStream(url.openStream());
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
+
+        FileOutputStream fileOutputStream = new FileOutputStream(filepath);
         byte dataBuffer[] = new byte[1024];
         int bytesRead;
         int totalRead = 0;

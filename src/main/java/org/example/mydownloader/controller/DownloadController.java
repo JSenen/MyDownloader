@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 public class DownloadController implements Initializable {
@@ -25,10 +27,16 @@ public class DownloadController implements Initializable {
     public Label lbStatus;
     public ProgressBar pbProgress;
     private String urlText;
+    private String path;
     private DownloadTask downloadTask;
 
     private static final Logger logger = LogManager.getLogger(DownloadController.class);
 
+    public DownloadController(String urlText, String path) {
+        logger.info("Descarga dirección " + urlText + " creada en " + path);
+        this.urlText = urlText;
+        this.path = path;
+    }
 
     //Se ejecuta cada ve que instanciamos el controlador
     @Override
@@ -39,7 +47,7 @@ public class DownloadController implements Initializable {
             String fileName = this.urlText.substring(this.urlText.lastIndexOf("/") + 1);
             File file = new File(fileName);
             file.createNewFile();
-            downloadTask = new DownloadTask(urlText, file);
+            downloadTask = new DownloadTask(urlText, file, path);
 
             pbProgress.progressProperty().unbind();
             pbProgress.progressProperty().bind(downloadTask.progressProperty());
@@ -67,11 +75,45 @@ public class DownloadController implements Initializable {
         }
     }
 
-    public DownloadController(String urlText) {
-        logger.info("Descarga dirección " + urlText + " creada");
-        this.urlText = urlText;
-    }
+    public void start(ActionEvent actionEvent) {
+        /*try{
+            FileChooser fileChooser = new FileChooser();
+            File file = fileChooser.showSaveDialog(tfUrl.getScene().getWindow());
+            if (file == null)
+                return;
 
+            downloadTask = new DownloadTask(urlText, file);
+
+            pbProgress.progressProperty().unbind();
+            pbProgress.progressProperty().bind(downloadTask.progressProperty());
+
+            downloadTask.stateProperty().addListener((observableValue, oldState, newState) -> {
+                System.out.println(observableValue.toString());
+                //Ventana emergente aviso descarga terminada o fallida
+                if (newState == Worker.State.SUCCEEDED) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("La descarga ha terminado");
+                    alert.show();
+                } else if (newState == Worker.State.FAILED) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setContentText("Error en la descarga");
+                    alert.show();
+                }
+            });
+
+            downloadTask.messageProperty()
+                    .addListener((observableValue, oldValue, newValue) -> lbStatus.setText(newValue));
+
+            new Thread(downloadTask).start(); //Nuevo hilo de descarga
+        } catch (MalformedURLException murle) {
+            murle.printStackTrace();
+            logger.error("URL mal formada", murle.fillInStackTrace());
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }*/
+
+    }
 
     @FXML
     public void stop(ActionEvent event) {
