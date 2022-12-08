@@ -80,7 +80,7 @@ Otras funcionalidades (1 pto cada una)
 
 ●	Programar el comienzo de una descarga para un momento determinado ❌
 ●	La aplicación podrá leer listas de enlaces de un fichero de texto y encolará las descargas ✅
-●	Posibilidad de configurar número máximo de descargas simultáneas ❌
+●	Posibilidad de configurar número máximo de descargas simultáneas ✅
 ●	Al cancelar la descarga, opcionalmente para el usuario, se podrá eliminar el fichero que se estaba descargando o se había descargado ❌
 ●	Al iniciar la aplicación se mostrará un SplashScreen ❌
 ●	Posibilidad de reanudar descargas canceladas previamente

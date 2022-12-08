@@ -4,10 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import org.example.mydownloader.util.R;
@@ -24,6 +21,8 @@ public class AppController {
 
     public TextField tfUrl;
     public TextField tFDirectory;
+    public TextField numDesc;
+    public Label labelMaxDwn;
     public Button btDownload;
     public Button btFileDownload;
     public Button btDirectory;
@@ -33,7 +32,6 @@ public class AppController {
     private Map<String, DownloadController> allDownloads; //Guardamos rastro cada descarga
     public AppController() {
         allDownloads = new HashMap<>();
-
     } //Metodo alamcena descargas fichero
 
 
@@ -41,10 +39,19 @@ public class AppController {
     public void launchDownload(ActionEvent actionEvent) {
 
         String urlText = tfUrl.getText();
+        //Leemos numero máximo descargas establecido
+        int numDwn = Integer.parseInt(numDesc.getText());
+        if (numDwn <= 0 ){
+            //Si supera máxinmo salta aviso
+            labelMaxDwn.setText("NUMERO MAXIMO ALCANZADO");
+            return;
+        }else{
+            labelMaxDwn.setText("");
+        }
         tfUrl.clear();
         tfUrl.requestFocus();
         path = tFDirectory.getText();
-        launch(urlText,path);
+        launch(urlText,path,numDwn);
     }
 
     @FXML
@@ -56,25 +63,32 @@ public class AppController {
 
     }
 
-    public void launch(String urlText, String path) {
+    public void launch(String urlText, String path, int numDwn) {
+
+        //Vamos descontando descargas de las establecidas
+        numDesc.setText(String.valueOf(numDwn-1));
+
         //Cargamos controller de la pantalla de cada descarga
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(R.getUI("downloadscreen.fxml"));
 
-            tFDirectory.setText(path);
+            try {
 
-            DownloadController downloadController = new DownloadController(urlText,path);
-            loader.setController(downloadController);
-            VBox vBox = loader.load();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(R.getUI("downloadscreen.fxml"));
 
-            String filename = urlText.substring(urlText.lastIndexOf("/") + 1);
-            tpDownloads.getTabs().add(new Tab(filename, vBox));
+                tFDirectory.setText(path);
 
-            allDownloads.put(urlText, downloadController);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+                DownloadController downloadController = new DownloadController(urlText,path);
+                loader.setController(downloadController);
+                VBox vBox = loader.load();
+
+                String filename = urlText.substring(urlText.lastIndexOf("/") + 1);
+                tpDownloads.getTabs().add(new Tab(filename, vBox));
+
+                allDownloads.put(urlText, downloadController);
+
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
 
     }
 
@@ -94,12 +108,13 @@ public class AppController {
 
     @FXML
     public void readDLC() {
+
+        int numDwn = Integer.parseInt(numDesc.getText());
         //Descarga desde fichero
          try {
             // Usuario selecciona fichero
             FileChooser fileChooser = new FileChooser();
             File dlcFile = fileChooser.showOpenDialog(tfUrl.getScene().getWindow());
-            
             if (dlcFile == null)
                 return;
 
@@ -107,9 +122,20 @@ public class AppController {
             Scanner reader = new Scanner(dlcFile);
             while (reader.hasNextLine()) {
                 String data = reader.nextLine();
+                numDwn = numDwn -1;
                 System.out.println(data);
                 // Lanzar controlador y descarga
-                launch(data,path);
+                //Va descontando descargas y lanza aviso si se supera numero establecido
+                if (numDwn >= 0 ){
+                    launch(data,path,numDwn);
+                    labelMaxDwn.setText("");
+                }else{
+                    labelMaxDwn.setText("NUMERO MAXIMO ALCANZADO");
+                    return;
+                }
+                numDesc.setText(String.valueOf(numDwn));
+
+
             }
             reader.close();
         } catch (FileNotFoundException e) {
