@@ -4,7 +4,7 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-        <File name="Fichero" fileName="multidescargas.log" bufferedIO="false" advertise="true">
+        <File name="Fichero" fileName="C:/Users/JSenen/Documents/Proyectos/PSP/MyDownloader/src/main/java/org/example/multidescargas.log" bufferedIO="false" advertise="true">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
     </Appenders>
@@ -15,4 +15,3 @@
         </Root>
     </Loggers>
 </Configuration>
-
