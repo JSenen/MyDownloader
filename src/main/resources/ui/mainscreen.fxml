@@ -22,8 +22,8 @@
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="208.0">
                      <children>
                         <Button fx:id="btDownload" mnemonicParsing="false" onAction="#launchDownload" prefHeight="26.0" prefWidth="156.0" text="Descargar" />
-                        <Button fx:id="btFileDownload" mnemonicParsing="false" onAction="#launchFileDownload" text="Descargar de fichero DLC" textFill="#cf2a0c" />
-                        <Button fx:id="btStopAllDownloads" mnemonicParsing="false" onAction="#stopAllDownloads" prefHeight="26.0" prefWidth="158.0" text="Cancelar Descargas" />
+                        <Button fx:id="btFileDownload" mnemonicParsing="false" onAction="#launchFileDownload" text="Descargar de fichero DLC" textFill="#0a0200" />
+                        <Button fx:id="btStopAllDownloads" mnemonicParsing="false" onAction="#stopAllDownloads" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: #EC7063;" text="Cancelar Descargas" />
                      </children>
                   </VBox>
                </children>
@@ -46,7 +46,7 @@
                         <Insets right="20.0" />
                      </padding>
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <Label text="Numero máximo descargas">
@@ -54,7 +54,13 @@
                         <Insets right="15.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="numDesc" prefHeight="26.0" prefWidth="32.0" />
+                  <TextField fx:id="numDesc" prefHeight="31.0" prefWidth="35.0" text="0" />
+                  <VBox prefHeight="40.0" prefWidth="29.0">
+                     <children>
+                        <Button fx:id="plusButton" mnemonicParsing="false" onAction="#plusButtonClick" prefHeight="14.0" prefWidth="26.0" text="+" />
+                        <Button fx:id="minusButton" mnemonicParsing="false" onAction="#minusButtonClick" prefHeight="24.0" prefWidth="27.0" text="-" />
+                     </children>
+                  </VBox>
                </children>
             </HBox>
             <TabPane fx:id="tpDownloads" prefHeight="313.0" prefWidth="578.0" tabClosingPolicy="UNAVAILABLE" />

@@ -63,8 +63,13 @@ Requisitos (1 pto cada uno, obligatorios)
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>2.19.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.19.0</version>
         </dependency>`
-    La cual nos permite utilizar la librería log4j para ir guardando un registro de cada descarga
+    La cual nos permite utilizar la librería log4j para ir guardando un registro de cada descarga y del funcionamiento de la aplicación
     Le indicamos la clase DonwloaderController como la que supervisionamos
     `private static final Logger logger = LogManager.getLogger(DownloadController.class);`
     Y en el constructor de la clase vamos guardando los registros de modo "info".
