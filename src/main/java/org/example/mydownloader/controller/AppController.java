@@ -5,20 +5,19 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import org.example.mydownloader.util.R;
+import java.awt.*;
+import java.io.*;
+import java.util.*;
 
-import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 public class AppController {
-
     public TextField tfUrl;
     public TextField tFDirectory;
     public TextField numDesc;
@@ -26,8 +25,12 @@ public class AppController {
     public Button btDownload;
     public Button btFileDownload;
     public Button btDirectory;
+    public Button btStopAllDownloads;
+    public Button plusButton;
+    public Button minusButton;
+    public Button butListDownloads;
+    public Button butCleanListado;
     public String path = "/Users/JSenen/Downloads";
-
     public TabPane tpDownloads; //id panel pestañas
     private Map<String, DownloadController> allDownloads; //Guardamos rastro cada descarga
     public AppController() {
@@ -39,7 +42,8 @@ public class AppController {
     public void launchDownload(ActionEvent actionEvent) {
 
         String urlText = tfUrl.getText();
-        //Leemos numero máximo descargas establecido
+
+        //Leemos numero máximo descargas establecido en la casilla de la aplicación
         int numDwn = Integer.parseInt(numDesc.getText());
         if (numDwn <= 0 ){
             //Si supera máxinmo salta aviso
@@ -56,9 +60,10 @@ public class AppController {
 
     @FXML
     public void selectDirectory(Event event){
-        FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showSaveDialog(tFDirectory.getScene().getWindow());
-        path = file.getParent();
+        //Selección de directorio de descarga
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File file = directoryChooser.showDialog(tFDirectory.getScene().getWindow());
+        path = file.getPath();
         tFDirectory.setText(path);
 
     }
@@ -143,6 +148,56 @@ public class AppController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void plusButtonClick(){
+
+        int num = Integer.parseInt(numDesc.getText());
+        numDesc.setText(String.valueOf(num+1));
+    }
+    @FXML
+    public void minusButtonClick(){
+        //Cuando vale 0 no sigue
+        if (numDesc.getText().equals("")){
+            numDesc.setText("0");
+            return;
+        }
+        int num = Integer.parseInt(numDesc.getText());
+        numDesc.setText(String.valueOf(num-1));
+    }
+    @FXML
+    //Metodo al pulsar boton para ver archivo log.
+    public void openListDownloads (ActionEvent event){
+        try {
+            File fileDownloads = new File ("/Users/JSenen/Documents/Proyectos/PSP/MyDownloader/DescargasRealizadas.txt");
+            if (!Desktop.isDesktopSupported()){
+                System.out.println("no soportado");
+            }
+            Desktop desktop = Desktop.getDesktop();
+            if (fileDownloads.exists())
+                desktop.open(fileDownloads);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void cleanListado (ActionEvent event) {
+
+        File file = new File("/Users/JSenen/Documents/Proyectos/PSP/MyDownloader/DescargasRealizadas.txt"); //Buscamos fichero
+        if (file.delete()){ //Si fichero existe lo elimina
+            System.out.println("Eliminado");
+        }
+        else
+        {
+            System.out.println("No exite");
+        }
+
+
+
+    }
+
 }
 
 
