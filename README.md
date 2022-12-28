@@ -7,10 +7,12 @@
 Requisitos (1 pto cada uno, obligatorios)
 
 ●	Posibilidad de descargar múltiples ficheros al mismo tiempo  ✅
+
     La clase  DownloadTask extends Task<Integer> nos permite realizar un multihilo de descargas. Creando un hilo concurrente por cada
     una de ellas.
 
 ●	Por cada descarga se irá indicando el progreso de descarga tanto en tamaño como en porcentaje total descargado ✅
+
     Dentro de la clase DownloadTask, en el metodo de llamada call(). Hemos implementado el siguiente código
 ```
     updateProgress(downloadProgress, 1);
@@ -19,6 +21,7 @@ Requisitos (1 pto cada uno, obligatorios)
     El cual nos ofrece en la barra de progreso tanto el porcentaje, como el tiempo de descarga y los megas descargados del total.
 
 ●	Todas las descargas deben poderse cancelar y eliminar de la ventana de la aplicación ✅
+
     Por medio de SceneBuilder, hemos implementado un boton en cada descarga y un boton general. Ambos con los métodos.
     stopAllDownloads() y stop(). Los cuales se implementan en el AppControler para eliminar las descargas de forma general o individual
 ``` 
@@ -42,6 +45,7 @@ Requisitos (1 pto cada uno, obligatorios)
     }
 ```
 ●	La ruta donde se descargan los ficheros, que será fija, se podrá configurar desde la aplicación ✅
+
     Se ha creado un nuevo camp de texto, asociado a una variable "path", en la que figura la ruta donde se guardará por defecto.
     También se ha añadido un nuevo boton, para que el usuario pueda seleccionar la ruta de destino si así lo desea.
     En la clase DownloadTask se ha pasado un nuevo dato, path, con la ruta. Y entre ese dato y el fichero se le pasa al FileOutputStream 
@@ -60,6 +64,7 @@ Requisitos (1 pto cada uno, obligatorios)
 ```
 ●	Se mantendrá un historial de todos los ficheros descargados por la aplicación y todas las descargas fallidas/canceladas. Este fichero se almacenará 
     como fichero de registro y podrá consultarse desde el interfaz de usuario ✅
+    
     Se crea una dependencia en el pom
 
 ```
@@ -106,7 +111,9 @@ También se ha creado un fichero Descargas.txt que se encarga de registrar las d
 Otras funcionalidades (1 pto cada una)
 
 ●	Programar el comienzo de una descarga para un momento determinado ❌
+
 ●	La aplicación podrá leer listas de enlaces de un fichero de texto y encolará las descargas ✅
+
 Para ello se ha creado en la clase AppController el método readDLC(), el cual se encarga de leer linea a linea el fichero seleccionado por 
 el usuario y ir mandando cada descarga al DownloadControler. En el mismo se añade un contador para no superar el límite máximo de descargas
 indicadas en la interfaz de usuario
@@ -150,6 +157,7 @@ indicadas en la interfaz de usuario
     }
 ```
 ●	Posibilidad de configurar número máximo de descargas simultáneas ✅
+
 Se ha creado en la interfaz de usuario un campo para indicar el número de descargas permitidas. También se le ha añadido dos botones para poder
 aumentar o disminuir el contador; o puede introducirlo directamente en el TextEdit.
 Se crea una variable "numDwn" de número entero que recoge su valor del anterior campo, y va disminuyendo por cada descarga hasta llegar a 0, con lo
@@ -177,17 +185,24 @@ El contador se utiliza tanto para descargas individuales como leidas de un fiche
     }
 ```
 ●	Al cancelar la descarga, opcionalmente para el usuario, se podrá eliminar el fichero que se estaba descargando o se había descargado ❌
+
 ●	Al iniciar la aplicación se mostrará un SplashScreen ❌
+
 ●	Posibilidad de reanudar descargas canceladas previamente ❌
-●	Si el usuario asi lo selecciona, que elija la ubicación de la descarga en el mismo momento en que ésta inicia, saltándose entonces la que haya configurada en la aplicación ❌
+
+●	Si el usuario asi lo selecciona, que elija la ubicación de la descarga en el mismo momento en que ésta inicia, saltándose entonces la que haya configurada en la aplicación 
+
 ●	En el caso de que haya límite de descargas y éste haya sido superado, que el usuario pueda lanzar más descargas y éstas queden encoladas esperando el momento en que puedan ser lanzadas ✅
+
 Se ha credo un campo en la interfaz para que el usuario pueda indicar en cualquier momento el numero de descargas.
 ●	Mostrar la velocidad de descarga (MB/s) en todo momento  ✅
+
 Durante la descarga, se puede observar en una etiqueta "label" el progreso en Mb de la misma
 ```
 updateProgress(downloadProgress, 1);
             updateMessage(Math.round(downloadProgress * 100) + " %\t\t"+Math.round(elapsedTime)+"seg\t\t"+totalRead/1048576+"Mb de "+fileSize/1000/1048576);
 ```
 ●	Realizar el seguimiento del proyecto utilizando la plataforma GitHub para almacenar el código y gestionando las issues (bug, mejoras, . . .) a medida que se vaya trabajando en él ✅
+
 Este proyecto se ha gestionado mediante GitHub.
 
