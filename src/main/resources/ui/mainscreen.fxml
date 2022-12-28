@@ -66,6 +66,7 @@
                         <Label text="Listado Descargas" />
                         <Button fx:id="butListDownloads" mnemonicParsing="false" onAction="#openListDownloads" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" text="Listado" />
                         <Button fx:id="butCleanListado" mnemonicParsing="false" onAction="#cleanListado" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" text="Borrar listado" />
+                        <Button fx:id="butLog" mnemonicParsing="false" onAction="#seeLog" prefHeight="28.0" prefWidth="139.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" text="Ver Log" />
                      </children>
                      <HBox.margin>
                         <Insets left="15.0" />

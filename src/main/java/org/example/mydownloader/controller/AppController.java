@@ -30,6 +30,7 @@ public class AppController {
     public Button minusButton;
     public Button butListDownloads;
     public Button butCleanListado;
+    public Button butlog;
     public String path = "/Users/JSenen/Downloads";
     public TabPane tpDownloads; //id panel pestañas
     private Map<String, DownloadController> allDownloads; //Guardamos rastro cada descarga
@@ -166,7 +167,7 @@ public class AppController {
         numDesc.setText(String.valueOf(num-1));
     }
     @FXML
-    //Metodo al pulsar boton para ver archivo log.
+    //Metodo al pulsar boton para ver archivo descargas terminadas
     public void openListDownloads (ActionEvent event){
         try {
             File fileDownloads = new File ("/Users/JSenen/Documents/Proyectos/PSP/MyDownloader/DescargasRealizadas.txt");
@@ -183,6 +184,7 @@ public class AppController {
         }
     }
     @FXML
+    //Metodo para borrar el archivo txt de descargas realizadas
     public void cleanListado (ActionEvent event) {
 
         File file = new File("/Users/JSenen/Documents/Proyectos/PSP/MyDownloader/DescargasRealizadas.txt"); //Buscamos fichero
@@ -193,9 +195,24 @@ public class AppController {
         {
             System.out.println("No exite");
         }
+    }
+    @FXML
+    //Metodo para ver el archivo LOG y comprobar descargas fallidas/Canceladas
+    public void seeLog (ActionEvent event) {
 
-
-
+        try {
+            File fileDownloads = new File ("/Users/JSenen/Documents/Proyectos/PSP/MyDownloader/multidescargas.log");
+            if (!Desktop.isDesktopSupported()){
+                System.out.println("no soportado");
+            }
+            Desktop desktop = Desktop.getDesktop();
+            if (fileDownloads.exists())
+                desktop.open(fileDownloads);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static java.lang.System.out;
+
 public class DownloadController implements Initializable {
 
     public TextField tfUrl;
@@ -52,7 +54,7 @@ public class DownloadController implements Initializable {
 
             downloadTask.stateProperty().addListener((observableValue, oldState,
                     newState) -> {
-                System.out.println(observableValue.toString());
+                out.println(observableValue.toString());
                 if (newState == Worker.State.SUCCEEDED) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setContentText("La descarga ha terminado");
@@ -78,7 +80,7 @@ public class DownloadController implements Initializable {
             murle.printStackTrace();
             logger.error("URL mal formada", murle.fillInStackTrace());
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            out.println("An error occurred.");
             e.printStackTrace();
         }
 
@@ -97,7 +99,7 @@ public class DownloadController implements Initializable {
             pbProgress.progressProperty().bind(downloadTask.progressProperty());
 
             downloadTask.stateProperty().addListener((observableValue, oldState, newState) -> {
-                System.out.println(observableValue.toString());
+                out.println(observableValue.toString());
                 //Ventana emergente aviso descarga terminada o fallida
                 if (newState == Worker.State.SUCCEEDED) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -118,7 +120,7 @@ public class DownloadController implements Initializable {
             murle.printStackTrace();
             logger.error("URL mal formada", murle.fillInStackTrace());
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            out.println("An error occurred.");
             e.printStackTrace();
         }
 
