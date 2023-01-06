@@ -6,11 +6,11 @@
 
 Requisitos (1 pto cada uno, obligatorios)
 
-●	Posibilidad de descargar múltiples ficheros al mismo tiempo  ✅
+●	Posibilidad de **descargar múltiples ficheros** al mismo tiempo  ✅
 
 La clase  DownloadTask extends Task<Integer> nos permite realizar un multihilo de descargas. Creando un hilo concurrente por cada una de ellas.
 
-●	Por cada descarga se irá indicando el progreso de descarga tanto en tamaño como en porcentaje total descargado ✅
+●	Por cada descarga se irá indicando el **progreso de descarga tanto en tamaño como en porcentaje total descargado** ✅
 
 Dentro de la clase DownloadTask, en el metodo de llamada call(). Hemos implementado el siguiente código
 ```
@@ -19,7 +19,7 @@ Dentro de la clase DownloadTask, en el metodo de llamada call(). Hemos implement
 ```
 El cual nos ofrece en la barra de progreso tanto el porcentaje, como el tiempo de descarga y los megas descargados del total.
 
-●	Todas las descargas deben poderse cancelar y eliminar de la ventana de la aplicación ✅
+●	Todas las descargas deben poderse **cancelar y eliminar** de la ventana de la aplicación ✅
 
 Por medio de SceneBuilder, hemos implementado un boton en cada descarga y un boton general. Ambos con los métodos.
 stopAllDownloads() y stop(). Los cuales se implementan en el AppControler para eliminar las descargas de forma general o individual
@@ -43,13 +43,13 @@ Y en el DownloadController
             downloadTask.cancel();
     }
 ```
-Tambien es posible cerrar cada pestaña de descarga al haber utilizado en la tabPolicy de el fichero xml lo siguiente
+Tambien es posible **cerrar cada pestaña** de descarga al haber utilizado en la tabPolicy de el fichero xml lo siguiente
    ``` 
    <TabPane fx:id="tpDownloads" prefHeight="287.0" prefWidth="760.0" tabClosingPolicy="SELECTED_TAB" /> 
    ```
 Permitiendo que cada panel ofrezca un <kbd>x</kbd> para cerrar individualmente
 
-●	La ruta donde se descargan los ficheros, que será fija, se podrá configurar desde la aplicación ✅
+●	La **ruta** donde se descargan los ficheros, que será fija, **se podrá configurar desde la aplicación** ✅
 
 Se ha creado un nuevo camp de texto, asociado a una variable "path", en la que figura la ruta donde se guardará por defecto.
 También se ha añadido un nuevo boton, para que el usuario pueda seleccionar la ruta de destino si así lo desea.
@@ -84,7 +84,7 @@ Se crea una dependencia en el pom
             <version>2.19.0</version>
         </dependency> 
 ```
-La cual nos permite utilizar la librería log4j para ir guardando un registro de cada descarga y del funcionamiento de la aplicación
+La cual nos permite utilizar la **librería log4j** para ir guardando un registro de cada descarga y del funcionamiento de la aplicación
 Le indicamos la clase DonwloaderController como la que supervisionamos
 ```
     private static final Logger logger = LogManager.getLogger(DownloadController.class);
@@ -111,7 +111,8 @@ También se ha creado un fichero Descargas.txt que se encarga de registrar las d
                     } catch (IOException e) {
                     }
 ```
-    
+
+***
 
 Otras funcionalidades (1 pto cada una)
 
@@ -163,11 +164,11 @@ indicadas en la interfaz de usuario
 ```
 ●	Posibilidad de configurar número máximo de descargas simultáneas ✅
 
-Se ha creado en la interfaz de usuario un campo para indicar el número de descargas permitidas. También se le ha añadido dos botones para poder
-aumentar o disminuir el contador; o puede introducirlo directamente en el TextEdit.
+Se ha creado en la interfaz de usuario un campo para indicar el **número de descargas permitidas**. También se le ha añadido dos botones para poder
+**aumentar o disminuir** el contador; o puede introducirlo directamente en el TextEdit.
 Se crea una variable "numDwn" de número entero que recoge su valor del anterior campo, y va disminuyendo por cada descarga hasta llegar a 0, con lo
 que activara un campo "Label" que nos indicará que hemos alcanzado el límite.
-El contador se utiliza tanto para descargas individuales como leidas de un fichero dlc
+**El contador se utiliza tanto para descargas individuales como leidas de un fichero DLC**
 ```
 @FXML
     public void launchDownload(ActionEvent actionEvent) {
@@ -195,7 +196,7 @@ El contador se utiliza tanto para descargas individuales como leidas de un fiche
 
 ●	Posibilidad de reanudar descargas canceladas previamente ❌
 
-●	Si el usuario asi lo selecciona, que elija la ubicación de la descarga en el mismo momento en que ésta inicia, saltándose entonces la que haya configurada en la aplicación 
+●	Si el usuario asi lo selecciona, que elija la ubicación de la descarga en el mismo momento en que ésta inicia, saltándose entonces la que haya configurada en la aplicación ❌ 
 
 ●	En el caso de que haya límite de descargas y éste haya sido superado, que el usuario pueda lanzar más descargas y éstas queden encoladas esperando el momento en que puedan ser lanzadas ✅
 
@@ -203,12 +204,12 @@ Se ha credo un campo en la interfaz para que el usuario pueda indicar en cualqui
 
 ●	Mostrar la velocidad de descarga (MB/s) en todo momento  ✅
 
-Durante la descarga, se puede observar en una etiqueta "label" el progreso en Mb de la misma
+Durante la descarga, se puede observar en una etiqueta "label" el **progreso en Mb de la misma en relación al total así como tiempo trascurrido**
 ```
 updateProgress(downloadProgress, 1);
-            updateMessage(Math.round(downloadProgress * 100) + " %\t\t"+Math.round(elapsedTime)+"seg\t\t"+totalRead/1048576+"Mb de "+fileSize/1000/1048576);
+updateMessage(Math.round(downloadProgress * 100) + " %\t\t"+Math.round(elapsedTime)+"seg\t\t"+totalRead/1048576+"Mb de "+Math.round(fileSize/1048576)+" Totales");
 ```
 ●	Realizar el seguimiento del proyecto utilizando la plataforma GitHub para almacenar el código y gestionando las issues (bug, mejoras, . . .) a medida que se vaya trabajando en él ✅
 
-Este proyecto se ha gestionado mediante GitHub.
+Este proyecto se ha **gestionado mediante GitHub.**
 
