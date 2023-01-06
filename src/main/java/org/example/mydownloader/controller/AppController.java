@@ -170,7 +170,8 @@ public class AppController {
     //Metodo al pulsar boton para ver archivo descargas terminadas
     public void openListDownloads (ActionEvent event){
         try {
-            File fileDownloads = new File ("/Users/JSenen/Documents/Proyectos/PSP/MyDownloader/DescargasRealizadas.txt");
+            //Archivo guarda el nombre de las descargas terminadas
+            File fileDownloads = new File ("DescargasRealizadas.txt");
             if (!Desktop.isDesktopSupported()){
                 System.out.println("no soportado");
             }
@@ -187,7 +188,7 @@ public class AppController {
     //Metodo para borrar el archivo txt de descargas realizadas
     public void cleanListado (ActionEvent event) {
 
-        File file = new File("/Users/JSenen/Documents/Proyectos/PSP/MyDownloader/DescargasRealizadas.txt"); //Buscamos fichero
+        File file = new File("DescargasRealizadas.txt");//Buscamos fichero
         if (file.delete()){ //Si fichero existe lo elimina
             System.out.println("Eliminado");
         }
@@ -201,7 +202,7 @@ public class AppController {
     public void seeLog (ActionEvent event) {
 
         try {
-            File fileDownloads = new File ("/Users/JSenen/Documents/Proyectos/PSP/MyDownloader/multidescargas.log");
+            File fileDownloads = new File ("multidescargas.log");
             if (!Desktop.isDesktopSupported()){
                 System.out.println("no soportado");
             }

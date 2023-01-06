@@ -8,22 +8,21 @@ Requisitos (1 pto cada uno, obligatorios)
 
 ●	Posibilidad de descargar múltiples ficheros al mismo tiempo  ✅
 
-    La clase  DownloadTask extends Task<Integer> nos permite realizar un multihilo de descargas. Creando un hilo concurrente por cada
-    una de ellas.
+La clase  DownloadTask extends Task<Integer> nos permite realizar un multihilo de descargas. Creando un hilo concurrente por cada una de ellas.
 
 ●	Por cada descarga se irá indicando el progreso de descarga tanto en tamaño como en porcentaje total descargado ✅
 
-    Dentro de la clase DownloadTask, en el metodo de llamada call(). Hemos implementado el siguiente código
+Dentro de la clase DownloadTask, en el metodo de llamada call(). Hemos implementado el siguiente código
 ```
     updateProgress(downloadProgress, 1);
-    updateMessage(Math.round(downloadProgress * 100) + " %\t\t"+Math.round(elapsedTime)+"seg\t\t"+totalRead/1048576+"Mb de "+fileSize/1000/1048576);
+    updateMessage(Math.round(downloadProgress * 100) + " %\t\t"+Math.round(elapsedTime)+"seg\t\t"+totalRead/1048576+"Mb de "+Math.round(fileSize/1048576)+" Totales");
 ```
-    El cual nos ofrece en la barra de progreso tanto el porcentaje, como el tiempo de descarga y los megas descargados del total.
+El cual nos ofrece en la barra de progreso tanto el porcentaje, como el tiempo de descarga y los megas descargados del total.
 
 ●	Todas las descargas deben poderse cancelar y eliminar de la ventana de la aplicación ✅
 
-    Por medio de SceneBuilder, hemos implementado un boton en cada descarga y un boton general. Ambos con los métodos.
-    stopAllDownloads() y stop(). Los cuales se implementan en el AppControler para eliminar las descargas de forma general o individual
+Por medio de SceneBuilder, hemos implementado un boton en cada descarga y un boton general. Ambos con los métodos.
+stopAllDownloads() y stop(). Los cuales se implementan en el AppControler para eliminar las descargas de forma general o individual
 ``` 
     @FXML
     public void stopAllDownloads() {
@@ -31,7 +30,7 @@ Requisitos (1 pto cada uno, obligatorios)
             downloadController.stop();
     }
 ```
-    Y en el DownloadController
+Y en el DownloadController
 
 ```
     @FXML
@@ -44,12 +43,18 @@ Requisitos (1 pto cada uno, obligatorios)
             downloadTask.cancel();
     }
 ```
+Tambien es posible cerrar cada pestaña de descarga al haber utilizado en la tabPolicy de el fichero xml lo siguiente
+   ``` 
+   <TabPane fx:id="tpDownloads" prefHeight="287.0" prefWidth="760.0" tabClosingPolicy="SELECTED_TAB" /> 
+   ```
+Permitiendo que cada panel ofrezca un <kbd>x</kbd> para cerrar individualmente
+
 ●	La ruta donde se descargan los ficheros, que será fija, se podrá configurar desde la aplicación ✅
 
-    Se ha creado un nuevo camp de texto, asociado a una variable "path", en la que figura la ruta donde se guardará por defecto.
-    También se ha añadido un nuevo boton, para que el usuario pueda seleccionar la ruta de destino si así lo desea.
-    En la clase DownloadTask se ha pasado un nuevo dato, path, con la ruta. Y entre ese dato y el fichero se le pasa al FileOutputStream 
-    para que lo guarde en la ruta seleccionada.
+Se ha creado un nuevo camp de texto, asociado a una variable "path", en la que figura la ruta donde se guardará por defecto.
+También se ha añadido un nuevo boton, para que el usuario pueda seleccionar la ruta de destino si así lo desea.
+En la clase DownloadTask se ha pasado un nuevo dato, path, con la ruta. Y entre ese dato y el fichero se le pasa al FileOutputStream 
+para que lo guarde en la ruta seleccionada.
 
 ```
         public DownloadTask(String urlText, File file, String path) throws MalformedURLException {
@@ -65,7 +70,7 @@ Requisitos (1 pto cada uno, obligatorios)
 ●	Se mantendrá un historial de todos los ficheros descargados por la aplicación y todas las descargas fallidas/canceladas. Este fichero se almacenará 
     como fichero de registro y podrá consultarse desde el interfaz de usuario ✅
     
-    Se crea una dependencia en el pom
+Se crea una dependencia en el pom
 
 ```
     <dependency>
@@ -195,6 +200,7 @@ El contador se utiliza tanto para descargas individuales como leidas de un fiche
 ●	En el caso de que haya límite de descargas y éste haya sido superado, que el usuario pueda lanzar más descargas y éstas queden encoladas esperando el momento en que puedan ser lanzadas ✅
 
 Se ha credo un campo en la interfaz para que el usuario pueda indicar en cualquier momento el numero de descargas.
+
 ●	Mostrar la velocidad de descarga (MB/s) en todo momento  ✅
 
 Durante la descarga, se puede observar en una etiqueta "label" el progreso en Mb de la misma
