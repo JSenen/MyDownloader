@@ -26,16 +26,18 @@ public class DownloadController implements Initializable {
     public Label lbStatus;
     public ProgressBar pbProgress;
     private String urlText;
-    private String path;
+    private String path; // Ruta al directorio seleccionado
     private DownloadTask downloadTask;
     private String fileName;
+    private int timeOut; // Tiempo de espera para descarga
 
     private static final Logger logger = LogManager.getLogger(DownloadController.class);
 
-    public DownloadController(String urlText, String path) {
+    public DownloadController(String urlText, String path, int timeOut) {
         logger.info("Descarga dirección " + urlText + " creada en " + path);
         this.urlText = urlText;
         this.path = path;
+        this.timeOut = timeOut;
     }
 
     //Se ejecuta cada ve que instanciamos el controlador
@@ -74,8 +76,18 @@ public class DownloadController implements Initializable {
 
             downloadTask.messageProperty()
                     .addListener((observableValue, oldValue, newValue) -> lbStatus.setText(newValue));
+            //Usamos libreria java timer schedule por si se ha establecido tiempo para iniciar la descarga (timeOut)
+            //Multiplicamos por 1000 timeOut porque la Libreria es en milisegundos
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask(){
+                        @Override
+                        public void run(){
+                            new Thread(downloadTask).start();
+                        }
+                    },
+                    1000*this.timeOut
+            );
 
-            new Thread(downloadTask).start();
         } catch (MalformedURLException murle) {
             murle.printStackTrace();
             logger.error("URL mal formada", murle.fillInStackTrace());
