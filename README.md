@@ -116,7 +116,25 @@ También se ha creado un fichero Descargas.txt que se encarga de registrar las d
 
 Otras funcionalidades (1 pto cada una)
 
-●	Programar el comienzo de una descarga para un momento determinado ❌
+●	Programar el comienzo de una descarga para un momento determinado ✅
+
+Se ha añadido un campo a la ventana en el que el usuario puede introducir el numero de segundos para que se inicie la descarga.
+Para ello, el hilo (Threath) que inicia la descarga se ha introducido dentro del Timer.schedule de la libreria java y se ha usado 
+la libreria por defecto de java Time.Task para crear una tarea Asíncrona.
+
+```
+ //Usamos libreria java timer schedule por si se ha establecido tiempo para iniciar la descarga (timeOut)
+            //Multiplicamos por 1000 timeOut porque la Libreria es en milisegundos
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask(){
+                        @Override
+                        public void run(){
+                            new Thread(downloadTask).start();
+                        }
+                    },
+                    1000*this.timeOut
+            );
+```
 
 ●	La aplicación podrá leer listas de enlaces de un fichero de texto y encolará las descargas ✅
 
