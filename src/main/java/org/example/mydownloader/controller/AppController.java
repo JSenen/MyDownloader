@@ -21,6 +21,8 @@ public class AppController {
     public TextField tfUrl;
     public TextField tFDirectory;
     public TextField numDesc;
+    public TextField editTextTimeOut;
+
     public Label labelMaxDwn;
     public Button btDownload;
     public Button btFileDownload;
@@ -31,7 +33,7 @@ public class AppController {
     public Button butListDownloads;
     public Button butCleanListado;
     public Button butlog;
-    public String path = "/Users/JSenen/Downloads";
+    public String path = System.getProperty("user.dir"); //Pasamos la ruta del usuario
     public TabPane tpDownloads; //id panel pestañas
     private Map<String, DownloadController> allDownloads; //Guardamos rastro cada descarga
     public AppController() {
@@ -83,7 +85,7 @@ public class AppController {
 
                 tFDirectory.setText(path);
 
-                DownloadController downloadController = new DownloadController(urlText,path);
+                DownloadController downloadController = new DownloadController(urlText,path,Integer.parseInt(editTextTimeOut.getText()));
                 loader.setController(downloadController);
                 VBox vBox = loader.load();
 
