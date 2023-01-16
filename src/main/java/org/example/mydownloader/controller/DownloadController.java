@@ -85,7 +85,7 @@ public class DownloadController implements Initializable {
                             new Thread(downloadTask).start();
                         }
                     },
-                    1000*this.timeOut
+                    1000L *this.timeOut
             );
 
         } catch (MalformedURLException murle) {
