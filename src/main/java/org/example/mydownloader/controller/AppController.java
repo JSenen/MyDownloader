@@ -33,7 +33,8 @@ public class AppController {
     public Button butListDownloads;
     public Button butCleanListado;
     public Button butlog;
-    public String path = System.getProperty("user.dir"); //Pasamos la ruta del usuario
+    public int timeOut;
+    public String path = System.getProperty("user.dir"); //Variable ruta del usuario
     public TabPane tpDownloads; //id panel pestañas
     private Map<String, DownloadController> allDownloads; //Guardamos rastro cada descarga
     public AppController() {
@@ -55,9 +56,16 @@ public class AppController {
         }else{
             labelMaxDwn.setText("");
         }
+
+        //Leemos campo ruta destino
+        //Si no la cambia usuario, será por defecto el work directory
+        if (!tFDirectory.equals("")){
+            tFDirectory.setText(path);
+            path = tFDirectory.getText();
+        }
         tfUrl.clear();
         tfUrl.requestFocus();
-        path = tFDirectory.getText();
+
         launch(urlText,path,numDwn);
     }
 
@@ -85,7 +93,14 @@ public class AppController {
 
                 tFDirectory.setText(path);
 
-                DownloadController downloadController = new DownloadController(urlText,path,Integer.parseInt(editTextTimeOut.getText()));
+                //Recogemos tiempo indicado para empezar descarga o por defecto 0
+                if (editTextTimeOut.getText().equals("")){
+                    timeOut = 0;
+                }else{
+                    timeOut = Integer.parseInt(editTextTimeOut.getText());
+                }
+
+                DownloadController downloadController = new DownloadController(urlText,path,timeOut);
                 loader.setController(downloadController);
                 VBox vBox = loader.load();
 
