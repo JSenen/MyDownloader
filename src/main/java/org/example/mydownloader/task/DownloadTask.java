@@ -65,8 +65,10 @@ public class DownloadTask extends Task<Integer> {
             elapsedTime = Duration.between(start, current).toSeconds();
 
             updateProgress(downloadProgress, 1);
-            //Nos presenta el porcentaje de descarga (Porcentaje - Tiempo - Descargado del total )
-            updateMessage(Math.round(downloadProgress * 100) + " %\t\t"+Math.round(elapsedTime)+"seg\t\t"+totalRead/1048576+"Mb de "+Math.round(fileSize/1048576)+" Totales");
+            //Nos presenta el porcentaje de descarga (Porcentaje - Tiempo - Descargado del total - Velocidad )
+            updateMessage(Math.round(downloadProgress * 100) + " %\t\t"+Math.round(elapsedTime)
+                    +"seg\t\t"+totalRead/1048576+"Mb de "+Math.round(fileSize/1048576)+
+                    " Totales  Velocidad ("+Math.round((fileSize/elapsedTime)/1048576)+" Mb/s)");
 
             //Realiza descarga mas lenta
             Thread.sleep(1);
