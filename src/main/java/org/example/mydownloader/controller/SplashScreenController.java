@@ -4,14 +4,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.mydownloader.util.R;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SplashScreenController implements Initializable {
-
     @FXML
     private AnchorPane anchorPane;
 
@@ -30,9 +27,9 @@ public class SplashScreenController implements Initializable {
         class SplashScreen extends Thread {
             @Override
             public void run() {
-                //Abrimos hilo de 5 segundos para que se vea la Splash Screen
+                //Abrimos hilo de 3 segundos para que se vea la Splash Screen
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
 
                     //Indicamos que pantalla abrir al acabar el hilo
                     Platform.runLater(new Runnable() {
@@ -53,11 +50,14 @@ public class SplashScreenController implements Initializable {
                             Scene scene = new Scene(scrollPane);
                             Stage stage = new Stage();
                             stage.setScene(scene);
+                            stage.setTitle("MyDownloader");
                             stage.show();
 
                             //Ocultamos la pantalla splash
                             anchorPane.getScene().getWindow().hide();
+
                         }
+
                     });
 
                 } catch (InterruptedException ex) {

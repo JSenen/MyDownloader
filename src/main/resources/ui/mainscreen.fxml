@@ -11,19 +11,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="811.0" style="-fx-background-color: #98A343;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <VBox fx:id="panel" prefHeight="563.0" prefWidth="809.0">
+      <VBox fx:id="panel" prefHeight="563.0" prefWidth="809.0" style="-fx-background-color: #98A342;">
          <children>
             <HBox alignment="CENTER" prefHeight="84.0" prefWidth="737.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="URL: " textAlignment="CENTER" wrappingWidth="55.11669921875" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="2.0" text="URL: ">
+                     <font>
+                        <Font name="Arial Black" size="19.0" />
+                     </font></Text>
                   <TextField fx:id="tfUrl" prefHeight="26.0" prefWidth="420.0" />
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="208.0">
                      <children>
-                        <Button fx:id="btDownload" mnemonicParsing="false" onAction="#launchDownload" prefHeight="26.0" prefWidth="156.0" text="Descargar" />
-                        <Button fx:id="btFileDownload" mnemonicParsing="false" onAction="#launchFileDownload" text="Descargar de fichero DLC" textFill="#0a0200" />
-                        <Button fx:id="btStopAllDownloads" mnemonicParsing="false" onAction="#stopAllDownloads" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: #EC7063;" text="Cancelar Descargas" />
+                        <Button fx:id="btDownload" mnemonicParsing="false" onAction="#launchDownload" prefHeight="28.0" prefWidth="159.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" text="Descargar" />
+                        <Button fx:id="btFileDownload" mnemonicParsing="false" onAction="#launchFileDownload" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" text="Descargar de fichero DLC" textFill="#0a0200" />
+                        <Button fx:id="btStopAllDownloads" mnemonicParsing="false" onAction="#stopAllDownloads" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: #daaba5; -fx-border-color: #000000;" text="Cancelar Descargas" />
                      </children>
                   </VBox>
                </children>
@@ -34,11 +37,17 @@
                      <children>
                         <HBox prefHeight="38.0" prefWidth="674.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Path" textAlignment="CENTER" wrappingWidth="53.958984375" />
-                              <TextField fx:id="tFDirectory" prefHeight="26.0" prefWidth="418.0" />
-                              <Button fx:id="btDirectory" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#selectDirectory" prefHeight="26.0" prefWidth="159.0" text="Seleccionar Destino">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Path" wrappingWidth="52.5">
+                                 <font>
+                                    <Font name="Arial Black" size="19.0" />
+                                 </font>
                                  <HBox.margin>
-                                    <Insets left="22.0" />
+                                    <Insets />
+                                 </HBox.margin></Text>
+                              <TextField fx:id="tFDirectory" prefHeight="26.0" prefWidth="418.0" />
+                              <Button fx:id="btDirectory" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#selectDirectory" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" text="Seleccionar Destino">
+                                 <HBox.margin>
+                                    <Insets left="25.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
@@ -49,14 +58,17 @@
             </HBox>
             <HBox prefHeight="51.0" prefWidth="665.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiempo Espera">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiempo Espera">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Black" size="13.0" />
+                     </font>
                   </Text>
-                  <TextField fx:id="editTextTimeOut" prefHeight="26.0" prefWidth="44.0">
+                  <TextField fx:id="editTextTimeOut" prefHeight="26.0" prefWidth="44.0" style="-fx-alignment: center;">
                      <HBox.margin>
-                        <Insets left="15.0" />
+                        <Insets left="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
@@ -71,7 +83,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Numero máximo descargas">
+                  <Label text="Numero máximo descargas" textFill="WHITE">
                      <padding>
                         <Insets right="15.0" />
                      </padding>
@@ -97,7 +109,7 @@
                </children>
             </HBox>
             <!-- tabClosingPolicy="SELECTED_TAB" nos permite cerrar cada panel de forma independiente -->
-            <TabPane fx:id="tpDownloads" prefHeight="273.0" prefWidth="756.0" tabClosingPolicy="ALL_TABS" />
+            <TabPane fx:id="tpDownloads" prefHeight="270.0" prefWidth="784.0" style="-fx-background-color: #bac46f;" tabClosingPolicy="ALL_TABS" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

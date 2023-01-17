@@ -3,10 +3,8 @@ package org.example.mydownloader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.example.mydownloader.controller.AppController;
 import org.example.mydownloader.controller.SplashScreenController;
 import org.example.mydownloader.util.R;
 
