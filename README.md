@@ -210,7 +210,80 @@ que activara un campo "Label" que nos indicará que hemos alcanzado el límite.
 ```
 ●	Al cancelar la descarga, opcionalmente para el usuario, se podrá eliminar el fichero que se estaba descargando o se había descargado ❌
 
-●	Al iniciar la aplicación se mostrará un SplashScreen ❌
+●	Al iniciar la aplicación se mostrará un SplashScreen ✅
+
+Se crea un SplashScreen que arranca al inicio de la aplicación.
+
+```
+ @Override
+    public void start(Stage stage) throws Exception {
+
+        //Cargamos el controlador de la pantalla incial de Splash
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(R.getUI("splashscreen.fxml"));
+        loader.setController(new SplashScreenController());
+        AnchorPane anchorPane = loader.load();
+
+        //Dibujamos la pantalla
+        Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
+        stage.setTitle("MyDownloader");
+        stage.show();
+    }
+```
+También se crea un Controller, el cual lanza un hilo de 4 segundos hasta que carga el siguiente controller de la ventana principal de la aplicación.
+```
+public class SplashScreenController implements Initializable {
+    @FXML
+    private AnchorPane anchorPane;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        new SplashScreen().start();
+    }
+        class SplashScreen extends Thread {
+            @Override
+            public void run() {
+                //Abrimos hilo de 3 segundos para que se vea la Splash Screen
+                try {
+                    Thread.sleep(3000);
+
+                    //Indicamos que pantalla abrir al acabar el hilo
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            //Cargamos controller de la pantalla principal
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(R.getUI("mainscreen.fxml"));
+                            loader.setController(new AppController());
+                            ScrollPane scrollPane = null;
+                            try {
+                                scrollPane = loader.load();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            Scene scene = new Scene(scrollPane);
+                            Stage stage = new Stage();
+                            stage.setScene(scene);
+                            stage.setTitle("MyDownloader");
+                            stage.show();
+
+                            //Ocultamos la pantalla splash
+                            anchorPane.getScene().getWindow().hide();
+
+                        }
+
+                    });
+
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(SplashScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+```
 
 ●	Posibilidad de reanudar descargas canceladas previamente ❌
 
