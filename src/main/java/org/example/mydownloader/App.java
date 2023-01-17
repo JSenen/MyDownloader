@@ -4,22 +4,24 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.mydownloader.controller.AppController;
+import org.example.mydownloader.controller.SplashScreenController;
 import org.example.mydownloader.util.R;
 
 public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        //Cargamos el controlador de la pantalla
+        //Cargamos el controlador de la pantalla incial de Splash
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(R.getUI("mainscreen.fxml"));
-        loader.setController(new AppController());
-        ScrollPane scrollPane = loader.load();
+        loader.setLocation(R.getUI("splashscreen.fxml"));
+        loader.setController(new SplashScreenController());
+        AnchorPane anchorPane = loader.load();
 
         //Dibujamos la pantalla
-        Scene scene = new Scene(scrollPane);
+        Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
         stage.setTitle("MyDownloader");
         stage.show();
